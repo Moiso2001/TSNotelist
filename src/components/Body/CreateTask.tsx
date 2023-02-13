@@ -17,6 +17,7 @@ const CreateTask = ({createTask}: Props) => {
         text: "",
         hour: "",
         completed: false,
+        day: new Date()
     })
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,10 +27,25 @@ const CreateTask = ({createTask}: Props) => {
         })
     }
 
+    
+    const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const date = e.target.value.split('-');
+        
+        const newDate = new Date()
+        newDate.setDate(Number(date[2]))
+        newDate.setMonth(Number(date[1]))
+        newDate.setFullYear(Number(date[0]))
+        
+        setTask({
+            ...task,
+            [e.target.name]: newDate
+        })
+    };
+    
     const handleOnSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(task.title.length > 0 ){
+        if(task.title.length > 0){
             createTask(task);
             setTask({
                 id: uuidv4(),
@@ -37,11 +53,12 @@ const CreateTask = ({createTask}: Props) => {
                 text: "",
                 hour: "",
                 completed: false,
+                day: new Date()
             });
         } else {
             alert('Is missing information about the task')
         }
-    }
+    };
 
     return (
         <div>
@@ -51,9 +68,13 @@ const CreateTask = ({createTask}: Props) => {
             <form onSubmit={handleOnSubmit}>
                 <div>
                     <label>Title</label>
-                    <input name="title" value={task.title} onChange={handleOnChange}/>
+                    <input required name="title" value={task.title} onChange={handleOnChange}/>
+                </div>
+                <div>
                     <label>Hour</label>
                     <input type="time" name="hour" value={task.hour} onChange={handleOnChange}/>
+                    <label>Day</label>
+                    <input required type="date" name="day" onChange={handleDate}/>
                 </div>
                 <div>
                     <label>Description</label>

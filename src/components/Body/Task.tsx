@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {TbTrash} from "react-icons/tb";
 import {GrFavorite} from "react-icons/gr";
@@ -11,16 +11,20 @@ type Props = {
     completed: boolean
     completeTask: Function
     deleteTask: Function
+    handleCount: Function
 };
 
-const Task = ({id, title, text, hour, completed, completeTask, deleteTask}: Props) => {
-    const [isOpen, setIsOpen] = useState<Boolean>(false)
+const Task = ({id, title, text, hour, completed, completeTask, deleteTask, handleCount}: Props) => {
+    const [isOpen, setIsOpen] = useState<Boolean>(false);
 
+    useEffect(() => {
+        handleCount()
+    },[])
     return(
         <div>
             <div>
                 <div>
-                    <input checked={completed} type="checkbox" name="completed" onClick={() => completeTask(id, !completed)}/>
+                    <input checked={completed} type="checkbox" name="completed" onChange={() => completeTask(id, !completed)}/>
                 </div>
                 <div>
                     <h5>{title}</h5>

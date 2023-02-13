@@ -5,6 +5,11 @@ const INITIAL_STATE = {
     day: 'Today'
 };
 
+type DateInitialState = {
+    date: Date
+    day: string
+}
+
 type DateReducerAction = 
 {
     type: "update_day",
@@ -15,7 +20,7 @@ type DateReducerAction =
 };
 
 
-const dateReducer = (state = INITIAL_STATE, action: DateReducerAction) => {
+const dateReducer = (state: DateInitialState , action: DateReducerAction) => {
     switch(action.type){
         case "update_day":
             const newDay = action.payload

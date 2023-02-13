@@ -4,4 +4,5 @@ export type Task = {
     text?: string
     hour?: string 
     completed: boolean
+    day: Date
 }
