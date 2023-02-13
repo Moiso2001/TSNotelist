@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import { Task } from "../types/task"; 
 
 const INITIAL_STATE = {
-    tasks: [{id: "1", title: "My first task :)", completed: false}],
+    tasks: [{id: "1", title: "My first task :)", completed: false, hour: "9:50pm"}],
     error: false
 }
 
