@@ -1,13 +1,11 @@
 import React from "react";
 
-const Body = () => {
-
-    
+const Task = () => {
     return(
         <div>
-
+            
         </div>
     )
 }
 
-export default Body;
+export default Task;

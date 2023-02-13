@@ -23,9 +23,9 @@ export default function Day({date, updateDay}: Props) {
 
     return (
         <div>
-        {days.map((d) => {
+        {days.map((d, i) => {
             return(
-                <div onClick={() => {
+                <div key={i} onClick={() => {
                         Number(d.toDateString().split(' ')[2]) === date
                         ? updateDay('Today')
                         : updateDay(d.toDateString().split(' ')[0])} 
