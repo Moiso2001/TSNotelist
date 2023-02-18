@@ -46,9 +46,6 @@ const Body = ({taskReducer} : Props) => {
     
     return(
         <div className={styles.divGlobal}>
-            <div className={styles.divSpanTotalTask}>
-                <span>{state.tasks.length} Tasks</span>
-            </div>
             <div className={styles.divTask}>
                 {
                     state.tasks.map((t: typeTask) => {

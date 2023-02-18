@@ -91,31 +91,43 @@ const CreateTask = ({createTask}: Props) => {
     };
 
     return (
-        <div>
+        <div className={styles.divGlobal}>
             <div>
-                <MdOutlineAddCircle/>
+                <MdOutlineAddCircle className={styles.iconAdd} onClick={() => setIsOpen(!isOpen)}/>
             </div>
-            <form onSubmit={handleOnSubmit}>
-                <div>
-                    <label>Title</label>
-                    <input className={error.title ? styles.error : styles.inputTitle} required name="title" value={task.title} onChange={handleOnChange}/>
-                    <span>{error.title}</span>
-                </div>
-                <div>
-                    <label>Hour</label>
-                    <input type="time" name="hour" value={task.hour} onChange={handleOnChange}/>
-                    <label>Day</label>
-                    <input required type="date" name="day" onChange={handleDate} value={dayInput}/>
-                </div>
-                <div>
-                    <label>Description</label>
-                    <textarea className={error.text ? styles.error : styles.inputText} name="text" value={task.text} onChange={handleOnChange}/>
-                    <span>Length: {task.text?.length}/140</span>
-                </div>
-                <div>
-                    <button onClick={handleOnSubmit} type="submit">Create</button>
-                </div>
-            </form>
+
+            {
+                isOpen && 
+                
+            <div className={styles.divForm}>
+                <form onSubmit={handleOnSubmit}>
+                    <div className={styles.divTitle}>
+                        <label>Title</label>
+                        <input className={error.title ? styles.error : styles.inputTitle} required name="title" value={task.title} onChange={handleOnChange}/>
+                        <span>{error.title}</span>
+                    </div>
+                    <div className={styles.divDates}>
+                        <div className={styles.divDate}>
+                            <label>Hour</label>
+                            <input type="time" name="hour" value={task.hour} onChange={handleOnChange}/>
+                        </div>
+                        <div className={styles.divDate}>
+                            <label>Day</label>
+                            <input required type="date" name="day" onChange={handleDate} value={dayInput}/>
+                        </div>
+                    </div>
+                    <div className={styles.divDescription}>
+                        <label>Description</label>
+                        <textarea className={error.text ? styles.error : styles.inputText} name="text" value={task.text} onChange={handleOnChange}/>
+                        <span>Length: {task.text?.length}/140</span>
+                    </div>
+                    <div className={styles.divSubmit}>
+                        <button onClick={handleOnSubmit} type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            }
+
         </div>
     )
 }

@@ -2,3 +2,73 @@
     border: 2px solid rgb(255, 69, 69);
     outline: rgb(255, 69, 69);
 }
+
+.iconAdd{
+    color: #48b3fb;
+    font-size: 70px;
+    transition: color 200ms;
+}
+
+.iconAdd:hover{
+    color: #9ed7fe;
+}
+
+.divForm{
+    background-color: #48b3fb;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 20px;
+    color: #ffff;
+}
+
+.divTitle{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.divTitle label{
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.divTitle input{
+    height: 28px;
+}
+
+.divDates{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divDate{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px
+}
+
+.divDate label{
+    font-size: 25px;
+    font-weight: 300;    
+}
+
+.divDate input{
+    height: 28px;    
+}
+
+.divDescription{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.divDescription label{
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.divDescription textarea{
+    width: 400px;
+    height: 100px;
+}

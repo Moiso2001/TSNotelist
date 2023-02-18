@@ -68,6 +68,9 @@ export default function Header({taskReducer} : Props) {
                 <div className={styles.divDay}>
                     <Day handleUpdateDayTask={handleUpdateDayTask} updateDay={updateDay} date={Number(stateDate.date.toDateString().split(' ')[2])}/>
                 </div>
+                <div className={styles.divSpanTotalTask}>
+                    <span>{state.tasks.length} Tasks</span>
+                </div>
             </div>
         )
     } else {
