@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {BsSearch} from "react-icons/bs";
 import useDateReducer from "../../hooks/dateReducer";
 
 import Day from "./Day";
 
+import { Task } from "../../types/task";
+
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
+
+import styles from "./Header.module.css"
 
 
 type Props = {
@@ -16,8 +20,8 @@ type Props = {
 }
 
 export default function Header({taskReducer} : Props) {
-    const [stateDate, dispatchDate] = useDateReducer()
-    const {state, dispatch} = taskReducer
+    const [stateDate, dispatchDate] = useDateReducer();
+    const {state, dispatch} = taskReducer;
 
     const addDays = () => {
         let newDate = new Date()
@@ -34,34 +38,34 @@ export default function Header({taskReducer} : Props) {
             type: "update_day",
             payload: day
         })
-    }
+    };
 
     const handleUpdateDayTask = (d: Date) => {
         dispatch({
             type: "update_day",
             payload: d
         })
-    }
+    };
 
     useEffect(() => {
-        addDays()
+        addDays();
     },[]);
 
     if(stateDate.date){
         return (
-            <div>
-                <div>
+            <div className={styles.divGlobal}>
+                <div className={styles.divDate}>
                     <span>{stateDate.date.toLocaleString('en-us', {  weekday: 'long' })}, {stateDate.date.toLocaleString('en-us', { month: 'short'})}, {stateDate.date.toDateString().split(' ')[2]}</span>
                 </div>
-                <div>
-                    <div>
+                <div className={styles.divTitleAndSearch}>
+                    <div className={styles.divTitle}>
                         <h1>{stateDate.day}</h1>
                     </div>
-                    <div>
-                        <BsSearch/>
+                    <div className={styles.divSearchIcon}>
+                        <BsSearch className={styles.icon}/>
                     </div>
                 </div>
-                <div>
+                <div className={styles.divDay}>
                     <Day handleUpdateDayTask={handleUpdateDayTask} updateDay={updateDay} date={Number(stateDate.date.toDateString().split(' ')[2])}/>
                 </div>
             </div>

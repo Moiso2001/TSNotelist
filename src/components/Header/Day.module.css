@@ -1,0 +1,21 @@
+.divGlobal{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    cursor: default;
+}
+
+.divDate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #696969;
+    font-weight: 300;
+}
+
+.spanNumber{
+    font-weight: 600;
+    color: #3e3e3e;
+}

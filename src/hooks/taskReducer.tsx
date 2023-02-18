@@ -5,9 +5,9 @@ import { Task } from "../types/task";
 
 const actualDay = new Date()
 actualDay.setDate(actualDay.getDate())
-
+    
 const INITIAL_STATE = {
-    tasks: [{id: "1", title: "My first task :)", completed: false, hour: "9:50pm", day: actualDay }],
+    tasks: [{id: "1", title: "My first task :)", completed: false, hour: "9:50pm", day: actualDay}],
     error: false,
     actualDay: actualDay,
 }

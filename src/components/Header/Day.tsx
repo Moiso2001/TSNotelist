@@ -3,6 +3,8 @@ import { useState } from "react";
 import useDateReducer from '../../hooks/dateReducer';
 import useTaskReducer from '../../hooks/taskReducer';
 
+import styles from "./Day.module.css"
+
 type Props = {
     date: number
     updateDay: Function
@@ -24,18 +26,18 @@ export default function Day({date, updateDay, handleUpdateDayTask}: Props) {
     }, [])
 
     return (
-        <div>
+        <div className={styles.divGlobal}>
         {days.map((d, i) => {
             return(
-                <div key={i} onClick={() => {
+                <div className={styles.divDate} key={i} onClick={() => {
                         Number(d.toDateString().split(' ')[2]) === date
                         ? updateDay('Today')
-                        : updateDay(d.toDateString().split(' ')[0]);
+                        : updateDay(d.toLocaleString('en-us', {  weekday: 'long' }));
 
                         handleUpdateDayTask(d)
                     }}>
-                    <span>{d.toDateString().split(' ')[0]}</span>
-                    <span>{Number(d.toDateString().split(' ')[2])}</span>
+                    <span className={styles.spanString}>{d.toDateString().split(' ')[0]}</span>
+                    <span className={styles.spanNumber}>{Number(d.toDateString().split(' ')[2])}</span>
                 </div>
             )
         })}

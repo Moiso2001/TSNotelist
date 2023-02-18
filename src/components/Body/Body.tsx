@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useTaskReducer from "../../hooks/taskReducer";
 
 import { Task as typeTask } from "../../types/task";
@@ -8,6 +8,8 @@ import CreateTask from "./CreateTask";
 
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
 
+import styles from "./Body.module.css";
+
 type Props = {
     taskReducer: {
         state: TaskInitialState
@@ -16,7 +18,6 @@ type Props = {
 }
 
 const Body = ({taskReducer} : Props) => {
-    const [count, setCount] = useState(0)
     const {state, dispatch} = taskReducer
 
     const numberDay = Number(state.actualDay.toDateString().split(' ')[2])
@@ -33,6 +34,7 @@ const Body = ({taskReducer} : Props) => {
             type: "delete_task",
             payload: id
         })
+
     }
 
     const handleCreateTask = (task: typeTask) => {
@@ -41,17 +43,13 @@ const Body = ({taskReducer} : Props) => {
             payload: task
         })
     }
-
-    const handleCount = () => {
-        setCount(c => c+1);
-    }
     
     return(
-        <div>
-            <div>
-                <span>{count} Tasks</span>
+        <div className={styles.divGlobal}>
+            <div className={styles.divSpanTotalTask}>
+                <span>{state.tasks.length} Tasks</span>
             </div>
-            <div>
+            <div className={styles.divTask}>
                 {
                     state.tasks.map((t: typeTask) => {
                         const taskDay = Number(t.day.toDateString().split(' ')[2])
@@ -65,7 +63,6 @@ const Body = ({taskReducer} : Props) => {
                             hour={t.hour}
                             completeTask={handleCompleteTask}
                             deleteTask={handleDeleteTask}
-                            handleCount={handleCount}
                             />)}
                         }
                     )
