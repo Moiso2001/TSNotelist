@@ -7,7 +7,7 @@ import {AiOutlineEdit} from "react-icons/ai"
 import styles from "./Task.module.css"
 
 type Props = {
-    id: string
+    id?: string 
     title: string
     text?: string
     hour?: string 

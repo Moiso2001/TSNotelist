@@ -21,7 +21,6 @@ const CreateTask = ({createTask}: Props) => {
     const [error, setError] = useState<Error>({title: false, text: false});
     const [isOpen, setIsOpen] = useState<Boolean>(false);
     const [task, setTask] = useState<Task>({
-        id: uuidv4(),
         title: "",
         text: "",
         hour: "",
@@ -77,7 +76,6 @@ const CreateTask = ({createTask}: Props) => {
         if(task.title.length > 0){
             createTask(task);
             setTask({
-                id: uuidv4(),
                 title: "",
                 text: "",
                 hour: "",

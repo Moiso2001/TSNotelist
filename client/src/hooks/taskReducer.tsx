@@ -1,7 +1,10 @@
+import axios from "axios";
 import { useReducer } from "react";
 import { act } from "react-dom/test-utils";
+import { BACK_URL } from "../constants/variables";
+import { postTask } from "../services/tasks";
 
-import { Task } from "../types/task"; 
+import { Task } from "../types/task";
 
 const actualDay = new Date()
 actualDay.setDate(actualDay.getDate())
@@ -14,7 +17,7 @@ const INITIAL_STATE = {
 
 export type TaskInitialState = {
     tasks: Task[],
-    error: boolean | string
+    error: string | boolean
     actualDay: Date
 };
 
@@ -30,16 +33,19 @@ export type TaskReducerAction = {
 } | {
     type: "update_day"
     payload: Date
+} | {
+    type: 'error'
+    payload: string | boolean
 }
 
-const taskReducer = (state: TaskInitialState, action: TaskReducerAction) => {
+const taskReducer =  (state: TaskInitialState, action: TaskReducerAction) => {
     switch(action.type){
         case "add_task":
             return{
                 ...state,
                 tasks: [...state.tasks, action.payload]
             };
-
+            
         case "completed":
             const taskToUpdate = state.tasks.find((t: Task) => t.id === action.payload.id);
             if(taskToUpdate){
@@ -68,10 +74,14 @@ const taskReducer = (state: TaskInitialState, action: TaskReducerAction) => {
                 }
             }
         case "update_day":
-            console.log(action.payload)
             return{
                 ...state,
                 actualDay: action.payload
+            }
+        case "error":
+            return{
+                ...state,
+                error: action.payload
             }
     }
 };

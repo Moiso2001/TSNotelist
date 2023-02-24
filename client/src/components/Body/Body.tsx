@@ -9,6 +9,7 @@ import CreateTask from "./CreateTask";
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
 
 import styles from "./Body.module.css";
+import { postTask } from "../../services/tasks";
 
 type Props = {
     taskReducer: {
@@ -38,10 +39,7 @@ const Body = ({taskReducer} : Props) => {
     }
 
     const handleCreateTask = (task: typeTask) => {
-        dispatch({
-            type: "add_task",
-            payload: task
-        })
+        postTask(task, dispatch)
     }
     
     return(
