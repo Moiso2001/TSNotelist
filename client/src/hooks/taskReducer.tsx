@@ -1,10 +1,6 @@
-import axios from "axios";
 import { useReducer } from "react";
-import { act } from "react-dom/test-utils";
-import { BACK_URL } from "../constants/variables";
-import { postTask } from "../services/tasks";
 
-import { Task } from "../types/task";
+import { Task } from "../constants/types/task";
 
 const actualDay = new Date()
 actualDay.setDate(actualDay.getDate())
@@ -21,7 +17,10 @@ export type TaskInitialState = {
     actualDay: Date
 };
 
-export type TaskReducerAction = {
+export type TaskReducerAction ={
+    type: 'get_tasks',
+    payload: Task[] | []
+} | {
     type: "add_task"
     payload: Task
 } | {
@@ -40,14 +39,20 @@ export type TaskReducerAction = {
 
 const taskReducer =  (state: TaskInitialState, action: TaskReducerAction) => {
     switch(action.type){
+        case "get_tasks":
+            return{
+                ...state,
+                tasks: action.payload
+            }
+
         case "add_task":
             return{
                 ...state,
                 tasks: [...state.tasks, action.payload]
             };
-            
+
         case "completed":
-            const taskToUpdate = state.tasks.find((t: Task) => t.id === action.payload.id);
+            const taskToUpdate = state.tasks.find((t: Task) => t._id === action.payload.id);
             if(taskToUpdate){
                 taskToUpdate.completed = action.payload.status
                 return{
@@ -61,11 +66,11 @@ const taskReducer =  (state: TaskInitialState, action: TaskReducerAction) => {
             };
 
         case "delete_task":
-            const taskToDelete = state.tasks.find((t: Task) => t.id === action.payload)
+            const taskToDelete = state.tasks.find((t: Task) => t._id === action.payload)
             if(taskToDelete){
                 return {
                     ...state,
-                    tasks: state.tasks.filter((t: Task) => t.id !== action.payload)
+                    tasks: state.tasks.filter((t: Task) => t._id !== action.payload)
                 }
             } else {
                 return{

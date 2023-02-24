@@ -5,7 +5,7 @@ import useDateReducer from "../../hooks/dateReducer";
 
 import Day from "./Day";
 
-import { Task } from "../../types/task";
+import { Task } from "../../constants/types/task";
 
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
 
