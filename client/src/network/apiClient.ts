@@ -21,8 +21,9 @@ axiosClient.interceptors.response.use(
 
     /* Second parameter, callback where we'll redirect the user to our notfound route */
     function (error) {
+      console.log("it's intercepted here")
       let res = error.response;
-      if (Number(res.status) === 401) {
+      if (Number(res.status) === 404) {
         window.location.href = `${FRONT_URL}notfound`;
       }
       console.error('Looks like there was a problem. Status Code: ' + res.status);

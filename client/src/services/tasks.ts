@@ -55,6 +55,7 @@ export function postTask (task: Task, dispatch: React.Dispatch<TaskReducerAction
         })
 }
 
+/* This getTasks service will bring all the task no matter date */
 export function getTasks (dispatch: React.Dispatch<TaskReducerAction>){
 
     /* We ask our route get task for all of our tasks available */
@@ -103,4 +104,21 @@ export function getTasks (dispatch: React.Dispatch<TaskReducerAction>){
         })
         }
     })
+}
+
+/* This deleteTask service will delete a specific task, looking with id */
+export function deleteTask (id: string, dispatch: React.Dispatch<TaskReducerAction>){
+
+    /* Calling the route delete task and bringing the id of the task to be deleted */
+    axiosClient.delete(`task/${id}`)
+    .then(res => {
+        console.log(res.data)
+    
+        /* We pass the id also to update the tasks and delete it manually at the react state.Tthe api will delete it at db and the reducer will delete it at the state */
+        dispatch({
+            type: "delete_task",
+            payload: id
+        })
+    })
+    .catch(err => console.log(err))
 }

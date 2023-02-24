@@ -9,7 +9,7 @@ import CreateTask from "./CreateTask";
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
 
 import styles from "./Body.module.css";
-import { getTasks, postTask } from "../../services/tasks";
+import { deleteTask, getTasks, postTask } from "../../services/tasks";
 
 type Props = {
     taskReducer: {
@@ -35,11 +35,7 @@ const Body = ({taskReducer} : Props) => {
     }
 
     const handleDeleteTask = (id: string) => {
-        dispatch({
-            type: "delete_task",
-            payload: id
-        })
-
+        deleteTask(id, dispatch)
     }
 
     const handleCreateTask = (task: typeTask) => {
