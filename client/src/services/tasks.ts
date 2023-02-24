@@ -10,7 +10,7 @@ import { axiosClient } from "../network/apiClient";
 export function postTask (task: Task, dispatch: React.Dispatch<TaskReducerAction>){ // Requering the task and the dispatch brought from the taskReducer invoked on Body.tsx
 
 
-    /* We call the axios posting the route and passing the task, also settled the cors*/
+    /* We import our axios instance and pass our route and task to create*/
         axiosClient.post('task',task)
     
     /* Once posted the task we receive the response */
