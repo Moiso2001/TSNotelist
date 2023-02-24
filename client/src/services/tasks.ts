@@ -1,7 +1,9 @@
-import { Task } from "../types/task"
 import axios from "axios"
+import { Task } from "../constants/types/task"
 import { BACK_URL } from "../constants/variables"
 import { TaskReducerAction, TaskInitialState } from "../hooks/taskReducer";
+
+import { axiosClient } from "../network/apiClient";
 
 
 /* This postTask service will work as action conecting the dispatch with the promise to the server */
@@ -9,17 +11,7 @@ export function postTask (task: Task, dispatch: React.Dispatch<TaskReducerAction
 
 
     /* We call the axios posting the route and passing the task, also settled the cors*/
-        axios.post(
-            `${BACK_URL}task`,
-            task,
-            {
-                headers: {
-                  'Access-Control-Allow-Origin': '*',
-                  'Content-Type': 'application/json',
-                  Accept: 'application/json',
-                },
-            },
-        )
+        axiosClient.post('task',task)
     
     /* Once posted the task we receive the response */
         .then((res) => {
@@ -60,4 +52,8 @@ export function postTask (task: Task, dispatch: React.Dispatch<TaskReducerAction
             })
             }
         })
+}
+
+export function getTasks (dispatch: React.Dispatch<TaskReducerAction>){
+    axios(BACK_URL)
 }

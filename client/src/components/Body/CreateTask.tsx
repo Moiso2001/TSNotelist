@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { Task } from "../../types/task";
+import { Task } from "../../constants/types/task";
 
 import {MdOutlineAddCircle} from "react-icons/md";
 

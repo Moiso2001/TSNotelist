@@ -1,10 +1,6 @@
-import axios from "axios";
 import { useReducer } from "react";
-import { act } from "react-dom/test-utils";
-import { BACK_URL } from "../constants/variables";
-import { postTask } from "../services/tasks";
 
-import { Task } from "../types/task";
+import { Task } from "../constants/types/task";
 
 const actualDay = new Date()
 actualDay.setDate(actualDay.getDate())
@@ -45,7 +41,7 @@ const taskReducer =  (state: TaskInitialState, action: TaskReducerAction) => {
                 ...state,
                 tasks: [...state.tasks, action.payload]
             };
-            
+
         case "completed":
             const taskToUpdate = state.tasks.find((t: Task) => t.id === action.payload.id);
             if(taskToUpdate){

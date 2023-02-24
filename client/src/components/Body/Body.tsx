@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useTaskReducer from "../../hooks/taskReducer";
 
-import { Task as typeTask } from "../../types/task";
+import { Task as typeTask } from "../../constants/types/task";
 
 import Task from "./Task"
 import CreateTask from "./CreateTask";
