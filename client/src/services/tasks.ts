@@ -1,5 +1,6 @@
 import axios from "axios"
 import { Task } from "../constants/types/task"
+import { TaskDTO } from "../constants/types/task.dto";
 import { BACK_URL } from "../constants/variables"
 import { TaskReducerAction, TaskInitialState } from "../hooks/taskReducer";
 
@@ -55,5 +56,51 @@ export function postTask (task: Task, dispatch: React.Dispatch<TaskReducerAction
 }
 
 export function getTasks (dispatch: React.Dispatch<TaskReducerAction>){
-    axios(BACK_URL)
+
+    /* We ask our route get task for all of our tasks available */
+    axiosClient.get('task')
+
+    /* Success response */
+    .then(res => {
+
+        /* Each task being transfered by JSON changes the Date to string, here we simply convert the string into Date again for each task */
+        const newResponse: Task[] = res.data.map((t: TaskDTO) => {
+            const newDate = new Date()
+            const arrayDate: String[] = t.day.split('-')
+            
+            newDate.setDate(Number(arrayDate[2][0] + arrayDate[2][1]))
+            newDate.setMonth(Number(arrayDate[1]))
+            newDate.setFullYear(Number(arrayDate[0]))
+
+            return {...t, day: newDate}
+        })
+
+        /* Finally with the new array with correct Date type we dispatch it to be saved into our response */
+        dispatch({
+            type: "get_tasks",
+            payload: newResponse
+        })
+    })
+
+    /* Error Handler */
+    .catch(error => {
+
+        /* We verify if is a know error, if not we handle it as unexpected error */
+        if (axios.isAxiosError(error)) {
+
+        console.log('error message: ', error.message);
+        dispatch({
+            type: "error",
+            payload: error.message
+        })
+
+        } else {
+
+        console.log('unexpected error: ', error);
+        dispatch({
+            type: "error",
+            payload: error.message
+        })
+        }
+    })
 }

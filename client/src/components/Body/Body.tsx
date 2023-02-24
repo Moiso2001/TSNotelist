@@ -9,7 +9,7 @@ import CreateTask from "./CreateTask";
 import { TaskReducerAction, TaskInitialState } from "../../hooks/taskReducer";
 
 import styles from "./Body.module.css";
-import { postTask } from "../../services/tasks";
+import { getTasks, postTask } from "../../services/tasks";
 
 type Props = {
     taskReducer: {
@@ -21,7 +21,11 @@ type Props = {
 const Body = ({taskReducer} : Props) => {
     const {state, dispatch} = taskReducer
 
-    const numberDay = Number(state.actualDay.toDateString().split(' ')[2])
+    const numberDay = Number(state.actualDay.toDateString().split(' ')[2]);
+
+    useEffect(()=>{
+        getTasks(dispatch)
+    }, [])
 
     const handleCompleteTask = (id: string, status: boolean) => {
         dispatch({
@@ -50,8 +54,8 @@ const Body = ({taskReducer} : Props) => {
                         const taskDay = Number(t.day.toDateString().split(' ')[2])
                         if(numberDay === taskDay) {
                             return (<Task 
-                            key={t.id}
-                            id={t.id}
+                            key={t._id}
+                            id={t._id}
                             title={t.title}
                             text={t.text}
                             completed={t.completed}
